@@ -467,6 +467,118 @@
       font-size: 1.3rem;
     }
 
+    /* ─── PORTFOLIO ACCORDION ──────────────────────────────── */
+    .portfolio-accordion { display: flex; flex-direction: column; gap: 0.75rem; margin-top: clamp(2rem, 4vw, 3.5rem); }
+
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--black);
+      transition: border-color 0.3s;
+    }
+
+    .accordion-item.open { border-color: var(--pink); }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .accordion-header:hover .accordion-title { color: var(--pink); }
+
+    .accordion-left { display: flex; align-items: center; gap: 1rem; }
+
+    .accordion-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      background: var(--pink-glow);
+      border: 1px solid rgba(255,45,120,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .accordion-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      transition: color 0.2s;
+    }
+
+    .accordion-count {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 0.15rem 0.65rem;
+      letter-spacing: 0.04em;
+    }
+
+    .accordion-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.35s ease, border-color 0.2s;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, padding 0.35s ease;
+      padding: 0 1.8rem;
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 2000px;
+      padding: 0 1.8rem 1.8rem;
+    }
+
+    /* Inside each accordion the same mosaic grid applies,
+       but nth-child rules are scoped per-grid so they reset nicely */
+    .accordion-body .portfolio-grid {
+      margin-top: 0;
+    }
+
+    /* Override mosaic for accordion grids — simpler 3-col layout */
+    .accordion-body .portfolio-item:nth-child(n) { grid-column: span 4; min-height: 220px; }
+    .accordion-body .portfolio-item:nth-child(1) { grid-column: span 8; min-height: 340px; grid-row: span 1; }
+    .accordion-body .portfolio-item:nth-child(2) { grid-column: span 4; min-height: 340px; }
+
+    @media (max-width: 900px) {
+      .accordion-body .portfolio-item:nth-child(n) { grid-column: span 6; min-height: 200px; }
+      .accordion-body .portfolio-item:nth-child(1) { grid-column: span 12; min-height: 260px; }
+      .accordion-body .portfolio-item:nth-child(2) { grid-column: span 6; min-height: 200px; }
+    }
+
+    @media (max-width: 560px) {
+      .accordion-body .portfolio-item:nth-child(n) { grid-column: span 12; min-height: 200px; }
+    }
+
     /* ─── ABOUT ────────────────────────────────────────────── */
     #about { background: var(--black); }
 
@@ -767,6 +879,111 @@
 
     .form-submit { margin-top: 0.4rem; }
 
+    /* ─── TESTIMONIALS ─────────────────────────────────────── */
+    #testimonials { background: var(--surface); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+      margin-top: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .testimonial-card {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-4px);
+    }
+
+    .testimonial-quote {
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--pink);
+      opacity: 0.4;
+      font-family: Georgia, serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-text {
+      font-size: 0.97rem;
+      color: #b0adb5;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--pink-glow);
+      border: 1px solid rgba(255,45,120,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--white);
+    }
+
+    .author-company {
+      font-size: 0.78rem;
+      color: var(--pink);
+      margin-top: 0.1rem;
+    }
+
+    .stars {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: var(--pink);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-placeholder {
+      border: 1.5px dashed var(--border);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.6rem;
+      min-height: 180px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .testimonial-placeholder:hover {
+      border-color: var(--pink);
+      transform: none;
+    }
+
+    .testimonial-placeholder .ph-icon {
+      font-size: 1.8rem;
+      opacity: 0.3;
+    }
+
     /* ─── FOOTER ───────────────────────────────────────────── */
     footer {
       background: var(--black);
@@ -863,6 +1080,7 @@
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -918,92 +1136,361 @@
         ══════════════════════════════════════════════════════
         HOW TO ADD YOUR WORK:
         ─────────────────────────────────────────────────────
-        IMAGE:
-          Replace the <div class="portfolio-placeholder"> with:
-          <img src="your-image.jpg" alt="Project name" loading="lazy" />
-
+        Add portfolio-item divs inside any accordion-body .portfolio-grid.
+        IMAGE:  <img src="your-image.jpg" alt="Project name" loading="lazy" />
         VIDEO:
-          Replace the <div class="portfolio-placeholder"> with:
-          <video autoplay muted loop playsinline>
+          <video loop playsinline preload="metadata">
             <source src="your-video.mp4" type="video/mp4" />
           </video>
-
-        FEATURED (wide) CARD: add class "featured" to the item div.
-
-        Update the overlay title/tag to match each piece.
+        Then add the .portfolio-overlay block beneath it.
         ══════════════════════════════════════════════════════
       -->
-      <div class="portfolio-grid stagger">
 
-        <!-- Item 1 — big left tile -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/POCO_LOKO_WITH_NEW_FINAL_CHANGES_IN_SQUARE.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>Poko Loko Fruit Drink with Nata De Coco</h3>
-            <p>Top-Down Orthographic View Advertisement</p>
+      <div class="portfolio-accordion" id="portfolioAccordion">
+
+        <!-- ── GENERAL PRODUCTS ────────────────────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">📦</div>
+              <span class="accordion-title">General Products</span>
+              <span class="accordion-count">5 projects</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <!-- Add your general product items here -->
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/PixelPanny_Sunglasses.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Sunglasses</h3>
+                  <p>Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/POCO_LOKO_WITH_NEW_FINAL_CHANGES_IN_SQUARE.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Poko Loko Fruit Drink with Nata De Coco</h3>
+                  <p>Top-Down Orthographic View Advertisement</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Nike_Box_With_Sound.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Nike Box</h3>
+                  <p>CGI VFX Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Wow_Sunscreen_With_Subtitles.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Wow Sunscreen</h3>
+                  <p>Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Poko_Loko_Sourtape_Final.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Poko Loko Sourtape</h3>
+                  <p>Product Visualization</p>
+                </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Item 2 — top right -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/Keyboard_Apt_Song.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>Keyboard</h3>
-            <p>Product visualization</p>
+        <!-- ── ELECTRONICS ─────────────────────────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">⚡</div>
+              <span class="accordion-title">Electronics</span>
+              <span class="accordion-count">4 projects</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Keyboard_Apt_Song.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Keyboard</h3>
+                  <p>Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Pixelpanny.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Headphones</h3>
+                  <p>Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Pexelpanny_Iphone_16_Final.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>iPhone 16</h3>
+                  <p>Product Visualization</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/hero_bg_Copy.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Car On Display</h3>
+                  <p>VFX Banner Animation</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Item 3 — mid right -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/Pixelpanny_Yums.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>Soft Drink Animation</h3>
-            <p>Liquid simulation</p>
+        <!-- ── BEVERAGE & LIQUID SIMULATION ───────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">🧃</div>
+              <span class="accordion-title">Beverage &amp; Liquid Simulation</span>
+              <span class="accordion-count">4 projects</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Pixelpanny_Yums.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Soft Drink Animation</h3>
+                  <p>Liquid Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Lime_Slash_New.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Soft Drink Animation</h3>
+                  <p>Liquid Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Bazana_Dhyjutkuyjutfkyug.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Chocolate Animation</h3>
+                  <p>Liquid Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Sappire_Chocolate_New_Demo.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Chocolate Animation</h3>
+                  <p>Liquid Simulation</p>
+                </div>
+            </div>
           </div>
         </div>
 
-        <!-- Item 4 — bottom left of second row -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/Vaddy_Building_Main.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>VFX Advertisment</h3>
-            <p>Character Advertisement With VFX</p>
+        <!-- ── CLOTHES ─────────────────────────────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">👗</div>
+              <span class="accordion-title">Clothes</span>
+              <span class="accordion-count">4 projects</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/New_York_Traffic_T_Shirst.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Clothing Animation</h3>
+                  <p>CGI VFX Cloth Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/T_Shirt_Version_2.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Clothing Animation</h3>
+                  <p>CGI VFX Cloth Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/T_Shirt_Cartoon_New_Sq1.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Clothing Animation</h3>
+                  <p>CGI VFX Cloth Simulation</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Deadpool_Shirt_2.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Clothing Animation</h3>
+                  <p>CGI VFX Cloth Simulation</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Item 5 — bottom right wide -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/Shyper_Cut.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>Brand Film</h3>
-            <p>Full CGI brand story</p>
+        <!-- ── CHARACTER ANIMATION ────────────────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">🧍</div>
+              <span class="accordion-title">Character Animation</span>
+              <span class="accordion-count">3 projects</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Vaddy_Building_Main.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>VFX Advertisement</h3>
+                  <p>Character Advertisement With VFX</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Vaddy_Exp_Test.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Vadilal Character</h3>
+                  <p>Character Expression Animation Set</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Shyper_Part_1.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Funny Skit Advertisement</h3>
+                  <p>Character Animation</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Item 6 — full width bottom strip -->
-        <div class="portfolio-item">
-          <video loop playsinline preload="metadata">
-            <source src="assets/Pepsi_Building_Fs.mp4" type="video/mp4" />
-          </video>
-          <div class="portfolio-overlay">
-            <h3>VFX Advertisment</h3>
-            <p>VFX On Real Footage</p>
+        <!-- ── EXPLAINERS ──────────────────────────────────── -->
+        <div class="accordion-item" data-accordion>
+          <div class="accordion-header">
+            <div class="accordion-left">
+              <div class="accordion-icon">🎬</div>
+              <span class="accordion-title">Explainers</span>
+              <span class="accordion-count">3 project</span>
+            </div>
+            <div class="accordion-chevron">▼</div>
+          </div>
+          <div class="accordion-body">
+            <div class="portfolio-grid">
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Shyper_Part_2.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Brand Film</h3>
+                  <p>Full CGI Brand Story</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/Lifeboy_New_Improved.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Brand Film</h3>
+                  <p>Full 3D CGI Expainer</p>
+                </div>
+              </div>
+              <div class="portfolio-item">
+                <video loop playsinline preload="metadata">
+                  <source src="assets/HS_Pirate_Final.mp4" type="video/mp4" />
+                </video>
+                <div class="portfolio-overlay">
+                  <h3>Brand Film</h3>
+                  <p>Full 3D CGI Expainer</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
-      <!-- /portfolio-grid -->
+      <!-- /portfolio-accordion -->
 
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ──────────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Testimonials</span>
+        <h2>What clients <span class="pink-gradient">say about us.</span></h2>
+        <p>Real words from real brands we've worked with.</p>
+      </div>
+
+      <div class="testimonials-grid stagger">
+
+        <!-- Sample card — replace with real review -->
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">PiexelPanny delivered exactly what our brand needed. The 3D visuals were stunning and the turnaround was incredibly fast. Our product had never looked this good!</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🧑</div>
+            <div class="author-info">
+              <div class="author-name">Client Name</div>
+              <div class="author-company">Company / Brand</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder 2 
+        <div class="testimonial-card testimonial-placeholder reveal">
+          <div class="ph-icon">💬</div>
+          <p>Your next client review goes here</p>
+        </div>
+         -->
+
+      </div>
     </div>
   </section>
 
@@ -1248,24 +1735,29 @@
 
     document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
 
-    // Portfolio video hover — play on mouseenter, pause on mouseleave
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-      const video = item.querySelector('video');
-      if (!video) return;
-
-      // Seek to 10% into the video once metadata is ready so thumbnail shows
-      video.addEventListener('loadedmetadata', () => {
-        video.currentTime = video.duration * 0.1;
-      }, { once: true });
-
-      item.addEventListener('mouseenter', () => {
-        video.play().catch(() => {});
-        item.classList.add('playing');
-      });
-
-      item.addEventListener('mouseleave', () => {
-        video.pause();
-        item.classList.remove('playing');
+    // Accordion
+    document.querySelectorAll('[data-accordion]').forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('[data-accordion]').forEach(i => i.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) {
+          item.classList.add('open');
+          // Init video hover for newly revealed items
+          item.querySelectorAll('.portfolio-item').forEach(pi => {
+            if (pi._accordionBound) return;
+            pi._accordionBound = true;
+            const video = pi.querySelector('video');
+            if (!video) return;
+            video.addEventListener('loadedmetadata', () => {
+              video.currentTime = video.duration * 0.1;
+            }, { once: true });
+            pi.addEventListener('mouseenter', () => { video.play().catch(()=>{}); pi.classList.add('playing'); });
+            pi.addEventListener('mouseleave', () => { video.pause(); pi.classList.remove('playing'); });
+          });
+        }
       });
     });
 
