@@ -561,23 +561,61 @@
     /* Inside each accordion the same mosaic grid applies,
        but nth-child rules are scoped per-grid so they reset nicely */
     .accordion-body .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .accordion-body .portfolio-item {
+      break-inside: avoid;
+      margin-bottom: 0;
+      min-height: unset;
+      height: auto;
+      grid-column: unset;
+      grid-row: unset;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    .accordion-body .portfolio-item img,
+    .accordion-body .portfolio-item video {
+      width: 100%;
+      height: auto;
+      object-fit: unset;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .accordion-body .portfolio-item:hover img,
+    .accordion-body .portfolio-item:hover video {
+      transform: scale(1.03);
+    }
+
+    .accordion-body .portfolio-placeholder {
+      aspect-ratio: 16/10;
+      height: auto;
+      min-height: unset;
+    }
+
+    @media (max-width: 900px) {
+      .accordion-body .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .accordion-body .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
       margin-top: 0;
     }
 
     /* Override mosaic for accordion grids — simpler 3-col layout */
-    .accordion-body .portfolio-item:nth-child(n) { grid-column: span 4; min-height: 220px; }
-    .accordion-body .portfolio-item:nth-child(1) { grid-column: span 8; min-height: 340px; grid-row: span 1; }
-    .accordion-body .portfolio-item:nth-child(2) { grid-column: span 4; min-height: 340px; }
-
-    @media (max-width: 900px) {
-      .accordion-body .portfolio-item:nth-child(n) { grid-column: span 6; min-height: 200px; }
-      .accordion-body .portfolio-item:nth-child(1) { grid-column: span 12; min-height: 260px; }
-      .accordion-body .portfolio-item:nth-child(2) { grid-column: span 6; min-height: 200px; }
-    }
-
-    @media (max-width: 560px) {
-      .accordion-body .portfolio-item:nth-child(n) { grid-column: span 12; min-height: 200px; }
-    }
+    /* accordion nth-child overrides removed — natural aspect ratio used instead */
 
     /* ─── ABOUT ────────────────────────────────────────────── */
     #about { background: var(--black); }
